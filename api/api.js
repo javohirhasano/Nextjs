@@ -9,6 +9,15 @@ const getUser = async () => {
 
     }
 }
+const getUserbyId = async () => {
+    try {
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+        return { success: true, data: res.data }
+    } catch (error) {
+        console.error("Hatolik");
+
+    }
+}
 const getPhotos = async () => {
     try {
         const res = await axios.get("https://jsonplaceholder.typicode.com/photos?_limit=40")
@@ -27,4 +36,5 @@ const getTodos = async () => {
 
     }
 }
-export { getUser, getPhotos, getTodos }
+
+export { getUser, getPhotos, getTodos, getUserbyId }

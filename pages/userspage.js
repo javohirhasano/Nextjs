@@ -2,21 +2,17 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { setUser } from "../redux/action"
 import styled from 'styled-components'
-import { Button, Link, Table, TableHead, TableRow } from '@material-ui/core';
+import { Button, Table, TableHead, TableRow } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { sidebarShow } from '../redux/action';
-
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-const UserWrapper = styled.div`
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
+const UserWrapper = styled.div`
 display:flex;
-background-image: url(https://www.myfitness.ee/wp-content/uploads/2016/05/nature-wallpaper-07.jpg);
-background-repeat: no-repeat;
-background-size: cover;
-background-position-y: center;
-background-color: rgb(0, 183, 255);
-background-blend-mode: darken;
+background-color: white;
 .content {
     height:100vh;
     color:white;
@@ -31,17 +27,16 @@ background-blend-mode: darken;
     flex-shrink:0;
     overflow:hidden;
     &.show{
-        width: 140px;
-        height: 400px;
-        background-color: black;
+        width: 300px;
+        height: 760px;
+        background-color: rgb(13, 9, 61);
         color: white;
-        border-bottom-right-radius: 80px;
     }
 }
 header{
     position:sticky;
-    background-color: rgb(0, 183, 255);
-   
+    background-color:white;
+   box-shadow:0px 4px 20px 0px;
 }
 .whole {
     flex:1;
@@ -52,15 +47,21 @@ header{
 }
 .batn1 {
     color:white;
-  
     list-style-type: none;
+    margin-top:10px;
+    text-decoration: none;
 }
-.href:hover{
+li:hover{
     color:rgb(0, 183, 255);
+    list-style-type: none;
+    text-decoration: none;
+}
+li{
+    list-style-type: none;
+    display:block;
 }
 .links {
-    padding-top:100px;
-    text-align:center;
+    padding-top:50px;
 }
 a{
     text-decoration: none;
@@ -69,64 +70,48 @@ a{
     display:flex;
 }
 .table{
-    background-color:   rgba(80, 217, 235, 0.5);
-    width:800px;
-    margin-left:200px;
-   padding-top:100px;
+    background-color: white;
+    width:100%;
+   height:100vh;
+   margin-top:20px;
 }
-.table:hover{
-    background-color:  rgb(139, 239, 248);
-}
-.text:hover{
-    color:white;
+.uls{
+display:block;
 }
 `
-
-
 const Userpage = () => {
+    const router = useRouter()
     const dispatch = useDispatch()
     const isSidebarshow = useSelector(state => state.isSidebarshow)
     const users = useSelector(state => state.user);
-
     useEffect(() => {
         setUser(dispatch)
     }, [])
-
-
-
     return (
         <UserWrapper>
 
             <div className={`sidebar ${isSidebarshow ? "show" : ""}`}>
                 < h3 className="textm"> Menu</h3>
                 <div className="links">
-                    <Link className="href" href="/Homepage" > <a> <Button className="batn1">
-                        <li className="href">Home</li> </Button ></a>
-                    </Link>
+                    <ul className="uls"><li>
+                        <Button><Link className="barlink" href="/homepage"><a className="barlink text-white">Home</a></Link></Button></li>
+                        <li>  <Button><Link className="barlink" href="/userspage"><a className="barlink text-white">User</a></Link></Button></li>
+                        <li>       <Button><Link className="barlink" href="todos"><a className="barlink text-white">todos</a></Link></Button></li>
+                        <li> <Button><Link className="barlink" href="photos"><a className="barlink text-white">Photos</a></Link></Button></li>
 
-                    <Link href="/photospage"> <a> <Button className="batn1"> <li className="href">Photos</li>
-                    </Button ></a>
-                    </Link>
-                    <Link href="/userspage"> <a> <Button className="batn1">
-                        <li className="href">User</li> </Button ></a>
-                    </Link>
-                    <Link href="/Todos"> <a> <Button className="batn1"> <li className="href">Todos</li>
-                    </Button ></a>
-                    </Link>
+                    </ul >
                 </div>
             </div>
             <div className="whole">
                 <header>
                     <div className="bars">
                         <Button onClick={() => sidebarShow(dispatch)}><MenuIcon></MenuIcon></Button>
-                        <h3>Next <span className="text-white">js</span >-React <span className="text-white">js</span></h3>
+                        <h3>Next <span className="text-primary">js</span >-React <span className="text-white">js</span></h3>
                     </div>
-                    <ul>
-                        <Link href="/Homepage" > <a> <Button className="batn"> <li>Home</li> </Button ></a></Link>
-                        <Link href="/Todos"> <a> <Button className="batn"> <li>Todos</li> </Button ></a></Link>
-                        <Link href="/userspage"> <a> <Button className="batn"> <li>User</li> </Button ></a></Link>
-                        <Link href="/photospage"> <a> <Button className="batn"> <li>Photos</li> </Button ></a></Link>
-                    </ul>
+                    <Button><Link className="barlink text-dark" href="/homepage"><a className="barlink text-white">Home</a></Link></Button>
+                    <Button><Link className="barlink" href="/userspage"><a className="barlink text-white">User</a></Link></Button>
+                    <Button><Link className="barlink" href="todos"><a className="barlink text-white">Todos</a></Link></Button>
+                    <Button><Link className="barlink" href="photos"><a className="barlink text-white">Photos</a></Link></Button>
                 </header>
                 <div className="content">
                     < Table className="table col-md-4 col-sm-5 col-lg-3">
@@ -137,16 +122,18 @@ const Userpage = () => {
                                 <TableCell className="text"><span className="text-danger">username</span></TableCell>
                                 <TableCell className="text"><span className="text-danger">Email</span></TableCell>
                                 <TableCell className="text"><span className="text-danger">Phone</span></TableCell>
+                                <TableCell className="text"><span className="text-danger">Action</span></TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody>
+                        <TableBody className="row">
                             {users ?.map(v =>
-                                <TableRow>
+                                <TableRow className="col-md-4 col-sm-8">
                                     <TableCell className="text">{v.id}</TableCell>
                                     <TableCell className="text">{v.name}</TableCell>
                                     <TableCell className="text">{v.username}</TableCell>
                                     <TableCell className="text">{v.email}</TableCell>
                                     <TableCell className="text">{v.phone}</TableCell>
+                                    <TableCell className="text"><Button onClick={() => router.push(`/user/${v.id}`)}>Open</Button></TableCell>
 
                                 </TableRow>
                             )}

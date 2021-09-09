@@ -1,10 +1,78 @@
 import { Slide } from 'react-awesome-reveal'
 import styled from 'styled-components'
-import { Button, Link, Fade } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { sidebarShow } from '../redux/action';
-
+import Link from "next/link"
 import { useDispatch, useSelector } from 'react-redux';
+
+const Homepage = () => {
+    const dispatch = useDispatch()
+    const isSidebarshow = useSelector(state => state.isSidebarshow)
+    return (
+        <HomeWrapper>
+            <div className="MainContent">
+                <div className={`sidebar ${isSidebarshow ? "show" : ""}`}>
+                    < h3 className="textm"> Menu</h3>
+                    <div className="links">
+                        <ul><li>
+                            <Button><Link className="barlink" href="/homepage"><a className="barlink text-white">Home</a></Link></Button></li>
+                            <li>  <Button><Link className="barlink" href="/userspage"><a className="barlink text-white">User</a></Link></Button></li>
+                            <li>       <Button><Link className="barlink" href="todos"><a className="barlink text-white">Todos</a></Link></Button></li>
+                            <li> <Button><Link className="barlink" href="photos"><a className="barlink text-white">Photos</a></Link></Button></li>
+
+                        </ul >
+                    </div>
+                </div>
+                <div className="whole">
+                    <header className="d-flex justify-content-between">
+                        <div className="bars">
+                            <Button className="batnmain" onClick={() => sidebarShow(dispatch)}><MenuIcon></MenuIcon></Button>
+                            <h3>Next <span className="text-white">js</span >-React <span className="text-white">js</span></h3>
+                        </div>
+                        <div>
+                            <Button className="barlink ms-5"><Link href="/homepage"><a className="barlink text-white">Home</a></Link></Button>
+                            <Button><Link className="barlink ms-5" href="/userspage"><a className="barlink text-white">User</a></Link></Button>
+                            <Button><Link className="barlink ms-5" href="todos"><a className="barlink text-white">Todos</a></Link></Button>
+                            <Button><Link className="barlink ms-5" href="photos"><a className="barlink text-white">Photos</a></Link></Button>
+                        </div>
+                    </header>
+                    <div className="content">
+                        <div className="row">
+                            <Slide>
+                                <div className="col-md-4 text-white d-flex text2">
+                                    <h1 className="text1">Unlock the guidance, tools, and resources you need
+           to design your best life – then live it. Every. Single. Day.</h1>
+                                </div>
+                            </Slide>
+                            <div className="col-md-4 text-white d-flex text2">
+                                <img src=""></img>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="secondcontend">
+                <h1 >Programmers</h1>
+                <div className="row d-flex align-items-center">
+                    <div className="col-md-6 col-sm-10 textMain">
+                        <Slide>
+                            <h1 className="">onversely, a motivating operation that causes a decrease in
+                                 the effectiveness of a reinforcer!
+                      </h1>
+                        </Slide>
+                    </div>
+                    <div className="col-md-6 col-sm-10">
+                        <Slide left>
+                            <img className="grogrammer" src="https://img.freepik.com/free-vector/colourful-illustration-of-programmer-working_23-2148281410.jpg?size=338&ext=jpg"></img>
+                        </Slide>
+                    </div>
+                </div>
+            </div>
+        </HomeWrapper >
+    )
+}
 const HomeWrapper = styled.div`
 
     .MainContent{
@@ -16,7 +84,6 @@ const HomeWrapper = styled.div`
         background-color: rgb(170, 5, 5);
         background-blend-mode: darken;
         .contain{
-          
             overflow-y: scroll;  
     }
 }
@@ -30,7 +97,8 @@ const HomeWrapper = styled.div`
     flex-shrink:0;
     overflow:hidden;
     &.show{
-        width: 140px;
+       
+        width: 300px;
         height: 780px;
         background-color: black;
         color: white;
@@ -67,11 +135,11 @@ header{
   
     list-style-type: none;
 }
-.href{
+li{
     list-style-type: none;
     color:white;
 }
-.href:hover{
+li:hover{
     color:red;
 }
 .links {
@@ -136,116 +204,5 @@ color:red;
   @keyframes mymove {
     50% {transform: rotate(360deg);}
   }
-    
-    `
-
-
-const Homepage = () => {
-    const dispatch = useDispatch()
-    const isSidebarshow = useSelector(state => state.isSidebarshow)
-    return (
-        <HomeWrapper>
-            <div className="MainContent">
-                <div className={`sidebar ${isSidebarshow ? "show" : ""}`}>
-                    < h3 className="textm"> Menu</h3>
-
-                    <div className="links">
-                        <Slide>
-                            <Link className="href link1" href="/Homepage" > <a> <Button className="batn1">
-                                <li className="href">Home</li> </Button ></a>
-                            </Link>
-                        </Slide>
-                        <Slide>
-                            <Link href="/photospage" className="href link2"> <a> <Button className="batn1">
-                                <li className="href">Album</li> </Button ></a>
-                            </Link>
-                        </Slide>
-                        <Slide>
-                            <Link href="/userspage" className="href link3" > <a> <Button className="batn1"> <li className="href">User</li>
-                            </Button ></a>
-                            </Link>
-                        </Slide>
-                        <Slide>
-                            <Link href="/Todos" className="href link4"> <a> <Button className="batn1"> <li className="href">Todos</li>
-                            </Button ></a>
-                            </Link>
-                        </Slide>
-                        <Slide>
-                            <Link href="/photospage" className="href link5"> <a> <Button className="batn1"> <li className="href">Photos</li>
-                            </Button ></a>
-                            </Link>
-                        </Slide>
-                    </div>
-
-                </div>
-                <div className="whole">
-                    <header>
-                        <div className="bars">
-                            <Button className="batnmain" onClick={() => sidebarShow(dispatch)}><MenuIcon></MenuIcon></Button>
-                            <h3>Next <span className="text-white">js</span >-React <span className="text-white">js</span></h3>
-                        </div>
-                        <ul className="man">
-                            <Slide>
-                                <Link href="/Homepage" > <a> <Button id="myDIV" className="batn"> <li>Home</li> </Button ></a></Link>
-                                <Link href="/Todos"> <a> <Button className="batn"> <li>Todos</li> </Button ></a></Link>
-                                <Link href="/userspage"> <a> <Button id="myDIV" className="batn"> <li>User</li> </Button ></a></Link>
-                                <Link href="/photospage"> <a> <Button className="batn"> <li>Photos</li> </Button ></a></Link>
-                            </Slide>
-                        </ul>
-                    </header>
-                    <div className="content">
-                        <div className="row">
-                            <Slide>
-                                <div className="col-md-4 text-white d-flex text2">
-                                    <h1 className="text1">Unlock the guidance, tools, and resources you need
-           to design your best life – then live it. Every. Single. Day.</h1>
-                                </div>
-                            </Slide>
-                            <div className="col-md-4 text-white d-flex text2">
-                                <img src=""></img>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="secondcontend">
-                <h1 >Programmers</h1>
-                <div className="row d-flex align-items-center">
-                    <div className="col-md-6 col-sm-10 textMain">
-                        <Slide>
-                            <h1 className="">onversely, a motivating operation that causes a decrease in
-                                 the effectiveness of a reinforcer!
-                      </h1>
-                        </Slide>
-                    </div>
-                    <div className="col-md-6 col-sm-10">
-                        <Slide left>
-                            <img className="grogrammer" src="https://img.freepik.com/free-vector/colourful-illustration-of-programmer-working_23-2148281410.jpg?size=338&ext=jpg"></img>
-                        </Slide>
-                    </div>
-                </div>
-
-            </div>
-            <div className="secondcontend">
-                <h1 className="text-dark">Full stack programmer</h1>
-                <div className="row d-flex align-items-center">
-                    <div className="col-md-6 col-sm-10 textMain">
-                        <Slide>
-                            <h1 className="text-danger">Here you can find activities to practise your writing skills.
-                             You can improve your writing by understanding!
-                      </h1>
-                        </Slide>
-                    </div>
-                    <div className="col-md-6 col-sm-10">
-                        <Slide left>
-                            <img className="grogrammer" src="https://myielts.kz/wp-content/uploads/2017/10/internet-invention.jpg"></img>
-                        </Slide>
-                    </div>
-                </div>
-
-            </div>
-        </HomeWrapper >
-    )
-}
+  `
 export default Homepage

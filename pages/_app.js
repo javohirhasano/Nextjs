@@ -2,9 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.css'
 import Head from "next/head"
 import styled from 'styled-components'
-
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 const AppWrapper = styled.div`
 header{
@@ -18,9 +16,7 @@ header ul li{
   list-style-type: none;
 }
 ul{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+ 
 }
 li{
 font-size:17px;
@@ -87,6 +83,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 
 import store from '../redux/store';
 import { Button } from '@material-ui/core';
+import Homepage from './homepage';
 
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 
@@ -100,6 +97,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <Component {...pageProps} />
+ 
       <footer className="d-flex">
         <div className="row">
         <div className="col-md-3 col-sm-10">

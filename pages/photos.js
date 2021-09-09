@@ -1,13 +1,11 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { setUser, setPhotos } from "../redux/action"
+import { setPhotos } from "../redux/action"
 import styled from 'styled-components'
-import { Button, Link } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import Link from 'next/link'
 import { sidebarShow } from '../redux/action';
-
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 const UserWrapper = styled.div`
 
 display:flex;
@@ -32,8 +30,8 @@ background-blend-mode: darken;
     flex-shrink:0;
     overflow:hidden;
     &.show{
-        width: 140px;
-        height: 400px;
+        width: 200px;
+        height: 500px;
         background-color: black;
         color: white;
         border-bottom-right-radius: 80px;
@@ -56,7 +54,10 @@ header{
   
     list-style-type: none;
 }
-.href:hover{
+li{
+    list-style-type: none;
+}
+li:hover{
     color:rgb(0, 183, 255);
 }
 .links {
@@ -122,19 +123,13 @@ const Photos = () => {
             <div className={`sidebar ${isSidebarshow ? "show" : ""}`}>
                 < h3 className="textm"> Menu</h3>
                 <div className="links">
-                    <Link className="href" href="/Homepage" > <a> <Button className="batn1">
-                        <li className="href">Home</li> </Button ></a>
-                    </Link>
+                    <ul className="uls"><li>
+                        <Button><Link className="barlink" href="/homepage"><a className="barlink text-white">Home</a></Link></Button></li>
+                        <li>  <Button><Link className="barlink" href="/userspage"><a className="barlink text-white">User</a></Link></Button></li>
+                        <li>       <Button><Link className="barlink" href="todos"><a className="barlink text-white">Todos</a></Link></Button></li>
+                        <li> <Button><Link className="barlink" href="photos"><a className="barlink text-white">Photos</a></Link></Button></li>
 
-                    <Link href="/Todos"> <a> <Button className="batn1"> <li className="href">Todos</li>
-                    </Button ></a>
-                    </Link>
-                    <Link href="/userspage"> <a> <Button className="batn1">
-                        <li className="href">User</li> </Button ></a>
-                    </Link>
-                    <Link href="/photospage"> <a> <Button className="batn1"> <li className="href">Photos</li>
-                    </Button ></a>
-                    </Link>
+                    </ul >
                 </div>
             </div>
             <div className="whole">
@@ -144,14 +139,11 @@ const Photos = () => {
                         <h3>Next <span className="text-white">js</span >-React <span className="text-white">js</span></h3>
                     </div>
                     <ul>
-                        <Link href="/Homepage" > <a> <Button className="batn"> <li>Home</li> </Button ></a></Link>
-                        <Link href="/userspage"> <a> <Button className="batn">
-                            <li className="href">User</li> </Button ></a>
-                        </Link>
-                        <Link href="/Todos"> <a> <Button className="batn"> <li className="href">Todos</li>
-                        </Button ></a>
-                        </Link>
-                        <Link href="/photospage"> <a> <Button className="batn"> <li>Photos</li> </Button ></a></Link>
+                        <Button><Link className="barlink" href="/homepage"><a className="barlink text-white">Home</a></Link></Button>
+                        <Button><Link className="barlink" href="/userspage"><a className="barlink text-white">User</a></Link></Button>
+                        <Button><Link className="barlink" href="todos"><a className="barlink text-white">Todos</a></Link></Button>
+                        <Button><Link className="barlink" href="photos"><a className="barlink text-white">Photos</a></Link></Button>
+
                     </ul>
                 </header>
                 <div className="content">
